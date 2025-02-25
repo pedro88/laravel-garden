@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Green;
+use App\Models\Garden;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/greens', function () {
+    return view('greens', [
+        'greens' => Green::all()
+    ]);
+});
+
+Route::get('/gardens', function () {
+    return view('gardens', [
+        'gardens' => Garden::all()
+    ]);
+});
+
+Route::get('/users', function () {
+    return view('users', [
+        'users' => User::all()
+    ]);
+});
+
+Route::get('/user/{id}', function ($id) {
+
+    $user = User::find($id);
+    return view('user', ['user' => $user]);
+});
+
+Route::get('/green/{id}', function ($id) {
+
+    $green = Green::find($id);
+    return view('green', ['green' => $green]);
+});
+
+Route::get('/garden/{id}', function ($id) {
+
+    $garden = Garden::find($id);
+    return view('garden', ['garden' => $garden]);
 });
